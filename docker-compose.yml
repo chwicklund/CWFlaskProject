@@ -1,0 +1,19 @@
+version: "1"
+services:
+  app:
+    build: ./app
+    container_name: "CW_Flask_App"
+    links:
+      - db
+    ports:
+      - "5001:5001"
+
+  db:
+    image: mysql:5.7
+    container_name: "MySQL_Database_1"
+    ports:
+      - "32001:3307"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
